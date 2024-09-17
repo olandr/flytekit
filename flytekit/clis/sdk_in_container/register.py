@@ -78,7 +78,7 @@ the root of your project, it finds the first folder that does not have a ``__ini
     "--raw-data-prefix",
     required=False,
     type=str,
-    default="",
+    default="flyte://data",
     help="Raw output data prefix when creating launch plans, where offloaded data will be stored",
 )
 @click.option(
@@ -203,7 +203,7 @@ def register(
     )
 
     # Create and save FlyteRemote,
-    remote = get_and_save_remote_with_click_context(ctx, project, domain, data_upload_location="flyte://data")
+    remote = get_and_save_remote_with_click_context(ctx, project, domain, data_upload_location=raw_data_prefix)
     click.secho(f"Registering against {remote.config.platform.endpoint}")
     repo.register(
         project,
